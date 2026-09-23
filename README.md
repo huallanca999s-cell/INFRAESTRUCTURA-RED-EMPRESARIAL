@@ -1,7 +1,7 @@
-# DISEÑO E IMPLEMENTACIÓN DE INFRAESTRUCTURA DE RED EMPRESARIAL
+# DISEÑO E IMPLEMENTACION SIMULADA DE INFRAESTRUCTURA DE RED EMPRESARIAL
 
 ## Descripción y Contexto del Proyecto
-El presente proyecto abarca el diseño, segmentación e implementación de una solución de infraestructura de red de alta disponibilidad para una sede corporativa de la empresa **NovaTech Solutions S.A.**, ubicada en Lima, Perú. La organización opera en un edificio de tres niveles que alberga sus diversas áreas administrativas, operativas y de desarrollo, además de un Centro de Datos centralizado.
+El presente proyecto abarca el diseño, segmentación y simulación a escala de una solución de infraestructura de red de alta disponibilidad para una sede corporativa de la empresa **NovaTech Solutions S.A.**, ubicada en Lima, Perú. La organización opera en un edificio de tres niveles que alberga sus diversas áreas administrativas, operativas y de desarrollo, además de un Centro de Datos centralizado.
 
 ---
 ## Arquitectura de Red (Modelo Jerárquico de 3 Niveles)
