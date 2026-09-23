@@ -94,4 +94,4 @@ Verificación del servicio HTTP desde los hosts clientes navegando hacia el serv
 ---
 
 **Autor:** Erick Isaias Huallanca Perez  
-**Contacto:** [LinkedIn](www.linkedin.com/in/erick-isaias-huallanca-perez-925b7632b) | [huallanca999s@gmail.com](mailto:huallanca999s@gmail.com)
+**Contacto:** [LinkedIn](https://www.linkedin.com/in/erick-isaias-huallanca-perez-925b7632b) | [huallanca999s@gmail.com](mailto:huallanca999s@gmail.com)
