@@ -4,8 +4,19 @@
 El presente proyecto abarca el diseño, segmentación e implementación de una solución de infraestructura de red de alta disponibilidad para una sede corporativa de la empresa **NovaTech Solutions S.A.**, ubicada en Lima, Perú. La organización opera en un edificio de tres niveles que alberga sus diversas áreas administrativas, operativas y de desarrollo, además de un Centro de Datos centralizado.
 
 ---
-### Arquitectura y Seguridad
-La solución de red adopta un **Modelo Jerárquico de 3 Capas** (Núcleo, Distribución y Acceso) con soporte para movilidad (WiFi corporativo) y alta disponibilidad redundante mediante **dos routers principales** y **dos switches multicapa (MLS)**. 
+## Arquitectura de Red (Modelo Jerárquico de 3 Niveles)
+
+La solución de infraestructura implementada para **NovaTech Solutions S.A.** adopta una arquitectura de **tres capas** (Acceso, Distribución y Núcleo), lo que proporciona mayor escalabilidad, flexibilidad, redundancia y una mejor segmentación de la red en comparación con un diseño de dos niveles.
+
+<p align="center">
+  <img src="TOPOLOGIA%20DE%20RED/Topologia3.jpg" alt="Topología de Red de Tres Niveles" width="600">
+</p>
+
+### Estructura del Escenario Empresarial:
+* **Capa de Acceso (*Access Layer*):** Conformada por conmutadores de acceso (`SW-VENTAS`, `SW-ATENCION`, `SW-DESARROLLO`, `SW-CALIDAD`, `SW-ADMIN`, `SW-TI`, `SW-DATACENTER`) que interconectan directamente a los dispositivos finales (PCs, impresoras, servidores y puntos de acceso inalámbrico).
+* **Capa de Distribución (*Distribution Layer*):** Conformada por conmutadores multicapa (`MLS1`, `MLS2`), los cuales agregan el tráfico proveniente de la capa de acceso, ejecutan el enrutamiento inter-VLAN y aplican políticas de seguridad.
+* **Capa Central (*Core Layer*):** Conformada por los routers principales (`R1`, `R2`), encargados de conmutar el tráfico a alta velocidad en el núcleo de la red y gestionar el enrutamiento mediante el protocolo **OSPF Área 0**.
+
 
 Para cumplir con los estándares de endurecimiento (*hardening*) de la empresa, los dispositivos de red incluyen:
 * Hostnames descriptivos, banners de acceso restringido (`#ACCESO RESTRINGIDO - NOVATECH SOLUTIONS S.A.#`) y cifrado global de contraseñas (`service password-encryption`).
@@ -16,11 +27,11 @@ Para cumplir con los estándares de endurecimiento (*hardening*) de la empresa, 
 
 ## Equipos y Tecnologías Aplicadas
 * **Simulador:** Cisco Packet Tracer
-* **Dispositivos:** Routers y Multilayer Switches Cisco, Access Points, Servidores de Red y Clientes (PCs/Laptops).
+* **Dispositivos:** Routers Cisco (2911), Multilayer Switches (3650), Switches de Acceso, Access Points, Servidores de Red, PCs, Laptops e Impresoras.
 * **Protocolos y Tecnologías:**
-  * **Capa 2:** VLANs (802.1Q), Enlaces Troncales (Trunking), Seguridad en Switches.
-  * **Capa 3:** VLSM, Subnetting `/30` para enlaces P2P, Inter-VLAN Routing, Enrutamiento Dinámico/Estático.
-  * **Servicios de Red:** DHCP Server, DNS, HTTP/HTTPS, Email, FTP/TFTP, SSH para gestión remota.
+  * **Capa 2:** VLANs (802.1Q), Enlaces Troncales (Trunking), Port-Security.
+  * **Capa 3:** VLSM, Subnetting `/30` para enlaces P2P, Inter-VLAN Routing, Enrutamiento Dinámico (OSPF Área 0) y Redundancia de Gateway (HSRP).
+  * **Servicios de Red:** DHCP Server, DNS, HTTP/HTTPS, Email, FTP, TFTP, SSH v2 para gestión remota.
 
 ---
 
