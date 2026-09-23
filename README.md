@@ -1,7 +1,16 @@
 # DISEÑO E IMPLEMENTACIÓN DE INFRAESTRUCTURA DE RED EMPRESARIAL
 
-## Descripción
-Este proyecto consiste en el diseño, segmentación e implementación de una arquitectura de red empresarial para interconectar diferentes áreas operativas y estratégicas. La solución aplica **VLSM** sobre el bloque principal `10.10.0.0/16`, segmentación mediante **VLANs**, enrutamiento inter-VLAN, enlaces punto a punto `/30` para alta disponibilidad y servicios centralizados en un Data Center.
+## Descripción y Contexto del Proyecto
+El presente proyecto abarca el diseño, segmentación e implementación de una solución de infraestructura de red de alta disponibilidad para una sede corporativa de la empresa **NovaTech Solutions S.A.**, ubicada en Lima, Perú. La organización opera en un edificio de tres niveles que alberga sus diversas áreas administrativas, operativas y de desarrollo, además de un Centro de Datos centralizado.
+
+---
+### Arquitectura y Seguridad
+La solución de red adopta un **Modelo Jerárquico de 3 Capas** (Núcleo, Distribución y Acceso) con soporte para movilidad (WiFi corporativo) y alta disponibilidad redundante mediante **dos routers principales** y **dos switches multicapa (MLS)**. 
+
+Para cumplir con los estándares de endurecimiento (*hardening*) de la empresa, los dispositivos de red incluyen:
+* Hostnames descriptivos, banners de acceso restringido (`#ACCESO RESTRINGIDO - NOVATECH SOLUTIONS S.A.#`) y cifrado global de contraseñas (`service password-encryption`).
+* Gestión remota segura mediante **SSH v2** (`domain-name: novatech.com`, llaves RSA de 1024 bits, bloqueo tras 3 intentos fallidos por 120 segundos).
+* Enrutamiento dinámico mediante **OSPF en el Área 0** y enrutamiento Inter-VLAN en la capa de distribución.
 
 ---
 
