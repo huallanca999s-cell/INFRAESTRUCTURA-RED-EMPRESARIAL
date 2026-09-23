@@ -89,4 +89,9 @@ Verificación del servicio HTTP desde los hosts clientes navegando hacia el serv
 ├── PRUEBAS DE CONECTIVIDAD/    # Evidencias de pruebas ping y servicios web
 ├── TOPOLOGIA DE RED/           # Esquema gráfico de la topología
 ├── .gitignore                  # Exclusión de archivos pesados
-└── README.md                   # Documentación principal del proyecto 
+└── README.md                   # Documentación principal del proyecto
+```
+---
+
+**Autor:** Erick Isaias Huallanca Perez  
+**Contacto:** [LinkedIn](https://www.linkedin.com/in/tu-perfil) | [huallanca999s@gmail.com](mailto:huallanca999s@gmail.com)
