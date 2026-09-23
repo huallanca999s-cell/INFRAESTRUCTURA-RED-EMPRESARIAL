@@ -1,0 +1,87 @@
+! ---------------------------------
+! CONFIGURACION BASICA DEL ROUTER 2
+! ---------------------------------
+enable
+configure terminal
+hostname R2
+
+!Colocar contraseña privada
+enable secret cisco123
+service password-encryption
+banner motd #ACCESO RESTRINGIDO - NOVATECH SOLUTIONS S.A.#
+
+!Configuración de consola
+line console 0
+password cisco123
+login
+exit
+
+!Configuración SSH
+ip domain-name novatech.com
+username admin secret cisco123
+crypto key generate rsa
+!colocar 1024 a "How many bits in the modulus [512]:"
+1024
+ip ssh version 2
+
+!Configuración de líneas VTY
+line vty 0 4
+login local
+transport input ssh
+exec-timeout 2 0
+exit
+
+!Limite de veces para colocar la contraseña incorrecta
+login block-for 120 attempts 3 within 60
+
+Guardar configuracion
+end
+copy running-config startup-config
+
+! --------------------------------------
+! CONFIGURACION DE INTERFACES DEL ROUTER
+! --------------------------------------
+enable
+configure terminal
+
+interface gigabitEthernet 0/1
+ip address 10.10.0.13 255.255.255.252
+no shutdown
+exit
+
+interface gigabitEthernet 0/2
+ip address 10.10.0.9 255.255.255.252
+no shutdown
+exit
+
+interface gigabitEthernet 0/0
+ip address 10.10.0.22 255.255.255.252
+no shutdown
+exit
+
+!Guardar configuracion
+end
+copy running-config startup-config
+
+! --------------------------------------------------------
+!   CONFIGURACION DEL PROTOCOLO ENRUTAMIENTO DINAMICO OSPF
+! --------------------------------------------------------
+
+enable
+configure terminal
+router ospf 1
+router-id 22.22.22.22
+
+10.10.0.8/30
+10.10.0.12/30
+10.10.0.20/30
+
+network 10.10.0.8 0.0.0.3 area 0
+network 10.10.0.12 0.0.0.3 area 0
+network 10.10.0.20 0.0.0.3 area 0
+
+end
+
+!Guardar configuracion
+end
+copy running-config startup-config

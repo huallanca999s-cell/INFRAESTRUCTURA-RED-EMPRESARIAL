@@ -1,0 +1,348 @@
+! --------------------------------------------
+! CONFIGURACION BASICA DEL MLS1 (DISTRIBUCION)
+! --------------------------------------------
+enable
+configure terminal
+hostname MLS1
+
+!Colocar contraseña privada
+enable secret cisco123
+service password-encryption
+banner motd #ACCESO RESTRINGIDO - NOVATECH SOLUTIONS S.A.#
+
+!Configuración de consola
+line console 0
+password cisco123
+login
+exit
+
+!Configuración SSH
+ip domain-name novatech.com
+username admin secret cisco123
+crypto key generate rsa
+!colocar 1024 a "How many bits in the modulus [512]:"
+1024
+ip ssh version 2
+
+!Configuración de líneas VTY
+line vty 0 4
+login local
+transport input ssh
+exec-timeout 2 0
+exit
+
+
+!Limite de veces para colocar la contraseña incorrecta
+login block-for 120 attempts 3 within 60
+
+!Guardar configuracion
+end
+copy running-config startup-config
+
+! ------------------------------------
+! CONFIGURACION DE INTERFACES DEL MLS1
+! ------------------------------------
+enable
+configure terminal
+!Habilitación routing
+ip routing
+
+interface gigabitEthernet 1/0/1
+no switchport
+ip address 10.10.0.2 255.255.255.252
+no shutdown
+exit
+
+interface gigabitEthernet 1/0/3
+no switchport
+ip address 10.10.0.10 255.255.255.252
+no shutdown
+exit
+
+interface gigabitEthernet 1/0/24
+no switchport
+ip address 10.10.0.17 255.255.255.252
+no shutdown
+exit
+
+!Guardar configuracion
+end
+copy running-config startup-config
+
+! ------------------------------------
+!     CREACION DE VLAN EN MLS1
+! ------------------------------------
+enable
+configure terminal
+
+! Creación de vlans
+vlan 10
+name VENTAS
+exit
+
+vlan 20
+name ATENCION
+exit
+
+vlan 30
+name DESARROLLO
+exit
+
+vlan 40
+name CALIDAD
+exit
+
+vlan 50
+name ADMINISTRACION
+exit
+
+vlan 60
+name TI
+exit
+
+vlan 70
+name WIFI
+exit
+
+vlan 80
+name DATACENTER
+exit
+
+vlan 99
+name GESTION
+exit
+
+! ------------------------------------
+!   CREACION DE INTERFACES VIRTUALES
+! ------------------------------------
+
+configure terminal
+
+interface vlan 10
+ip address 10.10.10.2 255.255.255.0
+no shutdown
+exit
+
+interface vlan 20
+ip address 10.10.20.2 255.255.255.0
+no shutdown
+exit
+
+interface vlan 30
+ip address 10.10.30.2 255.255.255.0
+no shutdown
+exit
+
+interface vlan 40
+ip address 10.10.40.2 255.255.255.0
+no shutdown
+exit
+
+interface vlan 50
+ip address 10.10.50.2 255.255.255.0
+no shutdown
+exit
+
+interface vlan 60
+ip address 10.10.60.2 255.255.255.0
+no shutdown
+exit
+
+interface vlan 70
+ip address 10.10.70.2 255.255.255.0
+no shutdown
+exit
+
+interface vlan 80
+ip address 10.10.80.2 255.255.255.0
+no shutdown
+exit
+
+interface vlan 99
+ip address 10.10.99.2 255.255.255.0
+no shutdown
+exit
+
+! ------------------------------------------------------------
+!   CREACION DE MODO TRONCALES PARA SOPORTAR VARIAS INTERFACES
+! ------------------------------------------------------------
+
+interface gigabitEthernet 1/0/9
+switchport mode trunk
+switchport trunk allowed vlan 70,80,99
+no shutdown
+exit
+
+interface gigabitEthernet 1/0/2
+switchport mode trunk
+switchport trunk allowed vlan 10,70,99
+no shutdown
+exit
+
+interface gigabitEthernet 1/0/4
+switchport mode trunk
+switchport trunk allowed vlan 20,70,99
+no shutdown
+exit
+
+interface gigabitEthernet 1/0/5
+switchport mode trunk
+switchport trunk allowed vlan 30,70,99
+no shutdown
+exit
+
+interface gigabitEthernet 1/0/6
+switchport mode trunk
+switchport trunk allowed vlan 40,70,99
+no shutdown
+exit
+
+interface gigabitEthernet 1/0/7
+switchport mode trunk
+switchport trunk allowed vlan 50,70,99
+no shutdown
+exit
+
+interface gigabitEthernet 1/0/8
+switchport mode trunk
+switchport trunk allowed vlan 60,70,99
+no shutdown
+exit
+
+! ---------------------------------------------------
+!   CONFIGURACION DEL PROTOCOLO HSRP PARA REDUNDANCIA
+! ---------------------------------------------------
+
+interface vlan 10
+standby 10 ip 10.10.10.1
+standby 10 priority 110
+standby 10 preempt
+exit
+
+interface vlan 20
+standby 20 ip 10.10.20.1
+standby 20 priority 110
+standby 20 preempt
+exit
+
+interface vlan 30
+standby 30 ip 10.10.30.1
+standby 30 priority 110
+standby 30 preempt
+exit
+
+interface vlan 40
+standby 40 ip 10.10.40.1
+standby 40 priority 110
+standby 40 preempt
+exit
+
+interface vlan 50
+standby 50 ip 10.10.50.1
+standby 50 priority 110
+standby 50 preempt
+exit
+
+interface vlan 60
+standby 60 ip 10.10.60.1
+standby 60 priority 110
+standby 60 preempt
+exit
+
+interface vlan 70
+standby 70 ip 10.10.70.1
+standby 70 priority 110
+standby 70 preempt
+exit
+
+interface vlan 80
+standby 80 ip 10.10.90.1
+standby 80 priority 110
+standby 80 preempt
+exit
+
+interface vlan 90
+standby 90 ip 10.10.90.1
+standby 90 priority 110
+standby 90 preempt
+exit
+
+
+! --------------------------------------------------------
+!   CONFIGURACION DEL PROTOCOLO ENRUTAMIENTO DINAMICO OSPF
+! --------------------------------------------------------
+
+enable
+configure terminal
+router ospf 1
+router-id 1.1.1.1
+
+network 10.10.0.0 0.0.0.3 area 0
+network 10.10.0.8 0.0.0.3 area 0
+network 10.10.0.16 0.0.0.3 area 0
+
+network 10.10.10.0 0.0.0.255 area 0
+network 10.10.20.0 0.0.0.255 area 0
+network 10.10.30.0 0.0.0.255 area 0
+network 10.10.40.0 0.0.0.255 area 0
+network 10.10.50.0 0.0.0.255 area 0
+network 10.10.60.0 0.0.0.255 area 0
+network 10.10.70.0 0.0.0.255 area 0
+network 10.10.80.0 0.0.0.255 area 0
+network 10.10.99.0 0.0.0.255 area 0
+
+end
+
+! ----------------------------------------------------
+!   CONFIGURACION OSPF - AÑADIDO DE PASSIVE-INTERFACE
+! ----------------------------------------------------
+
+router ospf 1
+passive-interface vlan 10
+passive-interface vlan 20
+passive-interface vlan 30
+passive-interface vlan 40
+passive-interface vlan 50
+passive-interface vlan 60
+passive-interface vlan 70
+passive-interface vlan 80
+passive-interface vlan 99
+exit
+
+! ----------------------------------------------------------------
+!   CONFIGURACION DHCP - ANTES SE DEBE CONFIGURAR EL SERVIDOR DHCP
+! ----------------------------------------------------------------
+
+enable
+configure terminal
+
+interface vlan 10
+ ip helper-address 10.10.80.10
+exit
+
+interface vlan 20
+ ip helper-address 10.10.80.10
+exit
+
+interface vlan 30
+ ip helper-address 10.10.80.10
+exit
+
+interface vlan 40
+ ip helper-address 10.10.80.10
+exit
+
+interface vlan 50
+ ip helper-address 10.10.80.10
+exit
+
+interface vlan 60
+ ip helper-address 10.10.80.10
+exit
+
+interface vlan 70
+ ip helper-address 10.10.80.10
+exit
+
+end
+

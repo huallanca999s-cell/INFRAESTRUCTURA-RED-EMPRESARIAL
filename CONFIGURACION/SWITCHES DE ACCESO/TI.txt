@@ -1,0 +1,102 @@
+! -------------------------------------------
+! CONFIGURACION BASICA DEL SWITCHES ACCESO TI
+! -------------------------------------------
+enable
+configure terminal
+hostname SW-TI
+
+!Colocar contraseña privada
+enable secret cisco123
+service password-encryption
+banner motd #ACCESO RESTRINGIDO - NOVATECH SOLUTIONS S.A.#
+
+!Configuración de consola
+line console 0
+password cisco123
+login
+exit
+
+!Configuración SSH
+ip domain-name novatech.com
+username admin secret cisco123
+crypto key generate rsa
+!colocar 1024 a "How many bits in the modulus [512]:"
+1024
+ip ssh version 2
+
+!Configuración de líneas VTY
+line vty 0 4
+login local
+transport input ssh
+exec-timeout 2 0
+exit
+
+!Limite de veces para colocar la contraseña incorrecta
+login block-for 120 attempts 3 within 60
+
+Guardar configuracion
+end
+copy running-config startup-config
+
+! --------------------------------------
+! CREACION DE VLAN EN SW DE ACCESO
+! --------------------------------------
+
+enable
+configure terminal
+
+vlan 60
+name TI
+exit
+
+vlan 70
+name WIFI
+exit
+
+vlan 99
+name GESTION
+exit
+
+! --------------------------------------------------
+! CONFIGURACION DE PUERTOS DE ACCESO A DISP. FINALES
+! --------------------------------------------------
+
+interface fastEthernet 0/1
+switchport mode access
+switchport access vlan 60
+no shutdown
+exit
+
+interface fastEthernet 0/2
+switchport mode access
+switchport access vlan 60
+no shutdown
+exit
+
+interface fastEthernet 0/3
+switchport mode access
+switchport access vlan 70
+no shutdown
+exit
+
+! ------------------------------------------------------------
+!   CREACION DE MODO TRONCALES PARA SOPORTAR VARIAS INTERFACES
+! ------------------------------------------------------------
+
+
+interface gigabitEthernet 0/1
+switchport mode trunk
+switchport trunk allowed vlan 60,70,99
+no shutdown
+exit
+
+interface gigabitEthernet 0/2
+switchport mode trunk
+switchport trunk allowed vlan 60,70,99
+no shutdown
+exit
+
+
+!Guardar configuracion
+end
+copy running-config startup-config

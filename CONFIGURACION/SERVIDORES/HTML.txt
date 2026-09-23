@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NOVATECH | Redes & Tecnología</title>
+    <style>
+        body {
+            background-color: #0f172a; /* Fondo principal azul oscuro */
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* Barra de Navegación */
+        .navbar {
+            background-color: #1e293b;
+            padding: 15px 20px;
+            border-bottom: 2px solid #38bdf8; /* Azul cyan brillante */
+        }
+        .logo {
+            color: #38bdf8;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        /* Sección Hero */
+        h1 {
+            color: #38bdf8;
+            font-size: 36px;
+            margin-bottom: 5px;
+        }
+        p.subtitle {
+            color: #94a3b8;
+            font-size: 15px;
+            margin-top: 0;
+        }
+
+        /* Tarjeta de Estado de Red */
+        .status-box {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .badge {
+            background-color: #38bdf8; /* Etiqueta azul cyan */
+            color: #0f172a;
+            padding: 4px 10px;
+            font-weight: bold;
+            font-size: 12px;
+            border-radius: 3px;
+        }
+
+        /* Grid de Servicios */
+        .services-box {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .services-box h3 {
+            color: #38bdf8;
+            margin-top: 0;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 8px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            color: #e2e8f0;
+        }
+        li {
+            padding: 6px 0;
+        }
+
+        /* Formulario Simulado */
+        .form-box {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: left;
+        }
+        .form-box h3 {
+            color: #38bdf8;
+            margin-top: 0;
+        }
+        input, textarea {
+            width: 95%;
+            padding: 8px;
+            margin: 6px 0 12px 0;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            color: #ffffff;
+            border-radius: 4px;
+        }
+        .btn-submit {
+            background-color: #38bdf8;
+            color: #0f172a;
+            padding: 10px 20px;
+            border: none;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Pie de página */
+        footer {
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #020617;
+            color: #64748b;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <div class="navbar">
+        <span class="logo">NOVATECH.COM</span>
+    </div>
+
+    <div class="container">
+        <!-- Hero -->
+        <h1>NOVATECH</h1>
+        <p class="subtitle">Infraestructura de Telecomunicaciones & Servicios Cloud</p>
+
+        <!-- Estado del Servidor -->
+        <div class="status-box">
+            <span class="badge">HTTP SERVER ONLINE</span>
+            <p style="color: #e2e8f0; margin-top: 10px; font-size: 13px;">
+                Conexión exitosa desde el cliente. Protocolo TCP/IP operacional.
+            </p>
+        </div>
+
+        <!-- Lista de Soluciones -->
+        <div class="services-box">
+            <h3>Soluciones de Ingeniería</h3>
+            <ul>
+                <li>✔ <b style="color: #38bdf8;">Routing & Switching:</b> Diseño de topologías LAN/WAN</li>
+                <li>✔ <b style="color: #38bdf8;">Servicios IP:</b> Configuración DHCP, DNS y Web Server</li>
+                <li>✔ <b style="color: #38bdf8;">Seguridad:</b> Reglas de acceso ACL y Firewalls</li>
+            </ul>
+        </div>
+
+        <!-- Formulario de Contacto -->
+        <div class="form-box">
+            <h3>Contacto Directo</h3>
+            <form action="#">
+                <label style="color: #94a3b8; font-size: 12px;">Nombre:</label>
+                <input type="text" placeholder="Tu nombre...">
+                
+                <label style="color: #94a3b8; font-size: 12px;">Mensaje:</label>
+                <textarea rows="3" placeholder="Escribe tu consulta..."></textarea>
+                
+                <button type="button" class="btn-submit">Enviar Consulta</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; NOVATECH - Cisco Packet Tracer Simulation Environment</p>
+    </footer>
+
+</body>
+</html>
